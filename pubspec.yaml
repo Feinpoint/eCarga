@@ -37,6 +37,11 @@ dependencies:
   cupertino_icons: ^1.0.6
   country_picker_pro: ^0.0.3
 
+  flutter_polyline_points: ^2.0.0
+  google_maps_flutter: ^2.6.1
+  location: ^6.0.1
+  flutter_svg: ^2.0.10+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
