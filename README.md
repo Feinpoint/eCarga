@@ -1,4 +1,4 @@
-# ecarga
+# eCarga
 
 A new Flutter project.
 
