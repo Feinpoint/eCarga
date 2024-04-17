@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "969460449657",
+    "project_id": "ecarga-c6973",
+    "storage_bucket": "ecarga-c6973.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969460449657:android:7ec41b9ef2b45866eaefa8",
+        "android_client_info": {
+          "package_name": "com.example.ecarga"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCccDBLfWb1vDojbENfICQcjUPZy-V462g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
