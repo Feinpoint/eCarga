@@ -1,3 +1,4 @@
+import 'package:ecarga/Pages/Auth/login.dart';
 import 'package:ecarga/Pages/loadingscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +13,8 @@ class eCargaMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoadingScreen(key: UniqueKey()), // Pass a Key to LoadingScreen
+      home: LoginPage(),
+      // LoadingScreen(key: UniqueKey()), // Pass a Key to LoadingScreen
     );
   }
 }
-

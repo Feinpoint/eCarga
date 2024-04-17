@@ -8,7 +8,7 @@ class LoginPage extends StatelessWidget {
   String selectedCountryCode =
       '+63'; // Initial value for the selected country code
 
-  LoginPage({Key? key}) : super(key: key);
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +119,8 @@ class LoginPage extends StatelessWidget {
                             hintStyle: TextStyle(
                               color: Color.fromARGB(255, 0, 0, 0),
                             ),
-                            border: InputBorder.none, // Remove the border of the TextFormField
+                            border: InputBorder
+                                .none, // Remove the border of the TextFormField
                           ),
                         ),
                       ),
@@ -148,7 +149,11 @@ class LoginPage extends StatelessWidget {
                 child: Center(
                   child: Text(
                     'Continue',
-                    style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: 'Metropolis', fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontFamily: 'Metropolis',
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -194,12 +199,13 @@ class LoginPage extends StatelessWidget {
             left: 37,
           ),
           Positioned(
-            child: Image.asset('assets/logos/AmbulanceIcon.png',
+            child: Image.asset(
+              'assets/logos/AmbulanceIcon.png',
               width: 150,
               height: 150,
             ),
             top: 690,
-             left: 280,
+            left: 280,
           ),
         ],
       ),
