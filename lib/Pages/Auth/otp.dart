@@ -1,10 +1,13 @@
+import 'package:ecarga/Pages/Base/welcomeecarga.dart';
 import 'package:flutter/material.dart';
 
 class OTPPage extends StatelessWidget {
-  final TextEditingController phoneController = TextEditingController();
+  final List<TextEditingController> otpControllers =
+      List.generate(6, (index) => TextEditingController());
+  final List<FocusNode> focusNodes = List.generate(6, (index) => FocusNode());
 
   OTPPage({Key? key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,12 +15,12 @@ class OTPPage extends StatelessWidget {
       body: Stack(
         children: [
           Positioned(
+            top: 150,
+            left: MediaQuery.of(context).size.width / 2 - 125,
             child: Image.asset(
               'assets/logos/IconNameCTA.png',
               width: 250,
             ),
-            top: 150,
-            left: 80,
           ),
           Positioned(
             top: 20,
@@ -30,6 +33,8 @@ class OTPPage extends StatelessWidget {
             ),
           ),
           Positioned(
+            top: 340,
+            left: 37,
             child: Text(
               'Enter OTP:',
               style: TextStyle(
@@ -39,188 +44,125 @@ class OTPPage extends StatelessWidget {
                 color: Color(0xFFAF2025),
               ),
             ),
-            top: 340,
-            left: 33,
           ),
           Positioned(
-            top: 370,
-            left: 33,
-            child: Container(
-              width: 50, // Set the width of the combined container
-              height: 60, // Set the height of the combined container
-              decoration: BoxDecoration(
-                color: Colors.white, // Set the color of the combined container
-                borderRadius: BorderRadius.circular(
-                    10), // Set the border radius of the combined container
-                border: Border.all(
-                    color: Color.fromARGB(255, 0, 0,
-                        0)), // Set the border color and width of the combined container
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextFormField(
-                  controller: phoneController,
-                  decoration: InputDecoration(
-                    hintText: '',
-                    hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
+            top: 380,
+            left: MediaQuery.of(context).size.width / 2.3 - 150,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(6, (index) {
+                return Padding(
+                  padding: EdgeInsets.only(left: 8),
+                  child: SizedBox(
+                    width: 50,
+                    height: 60,
+                    child: TextFormField(
+                      controller: otpControllers[index],
+                      maxLength: 1,
+                      keyboardType: TextInputType.number,
+                      textAlign: TextAlign.center,
+                      focusNode: focusNodes[index],
+                      onChanged: (value) {
+                        if (value.isEmpty) {
+                          if (index > 0) {
+                            FocusScope.of(context)
+                                .requestFocus(focusNodes[index - 1]);
+                          }
+                        } else {
+                          if (index < 5) {
+                            FocusScope.of(context)
+                                .requestFocus(focusNodes[index + 1]);
+                          } else {
+                            // Reached the last digit, submit or perform validation
+                            // You can add your logic here
+                          }
+                        }
+                      },
+                      decoration: InputDecoration(
+                        counterText: "",
+                        hintText: '',
+                        hintStyle: TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
                     ),
-                    border: InputBorder
-                        .none, // Remove the border of the TextFormField
+                  ),
+                );
+              }),
+            ),
+          ),
+          Positioned(
+            top: 460,
+            left: 140,
+            child: Container(
+              width: 150,
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Color(0xFFAF2025),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return WelcomeECARGA();
+                  }));
+                },
+                child: Center(
+                  child: Text(
+                    'Confirm',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontFamily: 'Metropolis',
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
             ),
           ),
           Positioned(
-            top: 370,
-            left: 93,
-            child: Container(
-              width: 50, // Set the width of the combined container
-              height: 60, // Set the height of the combined container
-              decoration: BoxDecoration(
-                color: Colors.white, // Set the color of the combined container
-                borderRadius: BorderRadius.circular(
-                    10), // Set the border radius of the combined container
-                border: Border.all(
-                    color: Color.fromARGB(255, 0, 0,
-                        0)), // Set the border color and width of the combined container
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextFormField(
-                  controller: phoneController,
-                  decoration: InputDecoration(
-                    hintText: '',
-                    hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                    border: InputBorder
-                        .none, // Remove the border of the TextFormField
-                  ),
-                ),
+            child: Text(
+              'Didn\'t receive an OTP?',
+              style: TextStyle(
+                fontSize: 13,
+                fontFamily: 'Metropolis',
+                color: Color(0xFFAF2025),
+                fontWeight: FontWeight.w600,
               ),
             ),
+            top: 520,
+            left: 85,
           ),
           Positioned(
-            top: 370,
-            left: 153,
-            child: Container(
-              width: 50, // Set the width of the combined container
-              height: 60, // Set the height of the combined container
-              decoration: BoxDecoration(
-                color: Colors.white, // Set the color of the combined container
-                borderRadius: BorderRadius.circular(
-                    10), // Set the border radius of the combined container
-                border: Border.all(
-                    color: Color.fromARGB(255, 0, 0,
-                        0)), // Set the border color and width of the combined container
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextFormField(
-                  controller: phoneController,
-                  decoration: InputDecoration(
-                    hintText: '',
-                    hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                    border: InputBorder
-                        .none, // Remove the border of the TextFormField
-                  ),
-                ),
+            child: Text(
+              'Resend',
+              style: TextStyle(
+                fontSize: 13,
+                fontFamily: 'Metropolis',
+                color: Color(0xFFAF2025),
+                fontWeight: FontWeight.w800,
               ),
             ),
+            top: 520,
+            left: 240,
           ),
           Positioned(
-            top: 370,
-            left: 213,
-            child: Container(
-              width: 50, // Set the width of the combined container
-              height: 60, // Set the height of the combined container
-              decoration: BoxDecoration(
-                color: Colors.white, // Set the color of the combined container
-                borderRadius: BorderRadius.circular(
-                    10), // Set the border radius of the combined container
-                border: Border.all(
-                    color: Color.fromARGB(255, 0, 0,
-                        0)), // Set the border color and width of the combined container
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextFormField(
-                  controller: phoneController,
-                  decoration: InputDecoration(
-                    hintText: '',
-                    hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                    border: InputBorder
-                        .none, // Remove the border of the TextFormField
-                  ),
-                ),
+            child: Text(
+              'in 1:30',
+              style: TextStyle(
+                fontSize: 13,
+                fontFamily: 'Metropolis',
+                color: Color(0xFFAF2025),
+                fontWeight: FontWeight.w600,
               ),
             ),
-          ),
-          Positioned(
-            top: 370,
-            left: 273,
-            child: Container(
-              width: 50, // Set the width of the combined container
-              height: 60, // Set the height of the combined container
-              decoration: BoxDecoration(
-                color: Colors.white, // Set the color of the combined container
-                borderRadius: BorderRadius.circular(
-                    10), // Set the border radius of the combined container
-                border: Border.all(
-                    color: Color.fromARGB(255, 0, 0,
-                        0)), // Set the border color and width of the combined container
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextFormField(
-                  controller: phoneController,
-                  decoration: InputDecoration(
-                    hintText: '',
-                    hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                    border: InputBorder
-                        .none, // Remove the border of the TextFormField
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 370,
-            left: 333,
-            child: Container(
-              width: 50, // Set the width of the combined container
-              height: 60, // Set the height of the combined container
-              decoration: BoxDecoration(
-                color: Colors.white, // Set the color of the combined container
-                borderRadius: BorderRadius.circular(
-                    10), // Set the border radius of the combined container
-                border: Border.all(
-                    color: Color.fromARGB(255, 0, 0,
-                        0)), // Set the border color and width of the combined container
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextFormField(
-                  controller: phoneController,
-                  decoration: InputDecoration(
-                    hintText: '',
-                    hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                    border: InputBorder
-                        .none, // Remove the border of the TextFormField
-                  ),
-                ),
-              ),
-            ),
+            top: 520,
+            left: 295,
           ),
         ],
       ),
